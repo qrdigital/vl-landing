@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VentaLista - Ordena tus Ventas por WhatsApp</title>
+    <link rel="shortcut icon" href="favicoventalista.png" type="image/png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #12b76a; 
+            --dark: #0f172a;    
+            --light: #f8fafc;   
+            --text: #334155;    
+            --border: #e2e8f0;
+        }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 680px; 
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0 20px 0;
+        }
+
+        .logo {
+            max-width: 180px;
+            height: auto;
+        }
+
+        section {
+            padding: 48px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--dark);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        h2 { 
+            font-size: 2rem; 
+            margin-bottom: 24px; 
+            line-height: 1.25;
+        }
+
+        .quiz-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px 0;
+        }
+
+        .quiz-list li {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .quiz-list li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #94a3b8;
+        }
+
+        .diagnosis {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.15rem;
+            line-height: 1.5;
+            border-left: 5px solid #f59e0b;
+        }
+
+        .hero-block {
+            background-color: var(--dark);
+            color: #ffffff;
+            padding: 40px 32px;
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .hero-block h2 {
+            color: #ffffff;
+            margin-top: 0;
+        }
+
+        .hero-block p {
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin-top: 24px;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border: none;
+        }
+
+        /* Cómo funciona (Flujo) */
+        .step-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+            margin: 32px 0;
+        }
+
+        .step {
+            background: var(--light);
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--dark);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Punto verde exclusivo para el flujo */
+        .step-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .arrow {
+            color: var(--primary);
+            font-size: 1.8rem;
+            font-weight: bold;
+            line-height: 1;
+            margin: 4px 0;
+            text-align: center;
+        }
+
+        /* Sección de Beneficios con números circulares */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            padding: 0;
+            list-style: none;
+        }
+
+        @media (max-width: 500px) {
+            .benefits-grid { grid-template-columns: 1fr; }
+        }
+
+        .benefits-grid li {
+            background: #ffffff;
+            border: 1px solid var(--border);
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        /* El número oscuro con fondo circular para Beneficios */
+        .benefit-number {
+            background: var(--dark);
+            color: #ffffff;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            background: var(--light);
+            padding: 16px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 700;
+            color: var(--dark);
+            border: 1px solid var(--border);
+        }
+
+        .include-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0 0 0;
+        }
+
+        .include-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed var(--border);
+            color: var(--text);
+            font-size: 1rem;
+        }
+
+        .offer-box {
+            background: var(--light);
+            border: 2px solid var(--dark);
+            padding: 40px 24px;
+            border-radius: 16px;
+            text-align: center;
+            margin: 30px 0;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+        }
+
+        .price {
+            font-size: 3rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            color: var(--dark);
+            margin: 10px 0;
+            letter-spacing: -0.03em;
+        }
+
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 18px 40px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 12px; 
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 4px 12px rgba(18, 183, 106, 0.25);
+            margin-top: 15px;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #109e5b;
+            transform: translateY(-1px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <img src="logoventalista.jpg" alt="VentaLista Logo" class="logo">
+        </header>
+
+        <section>
+            <h2>¿Tus clientes preguntan mucho y compran poco?</h2>
+            <ul class="quiz-list">
+                <li>Respondes exactamente lo mismo todos los días de forma manual.</li>
+                <li>Envías ráfagas de fotos sueltas que saturan y confunden.</li>
+                <li>Compartes PDFs pesados que tus clientes evitan descargar.</li>
+            </ul>
+            
+            <div class="diagnosis">
+                Hoy tus clientes te escriben, preguntan, dudan y desaparecen. Mientras más preguntas , menos probabilidades de cerrar la venta.
+            </div>
+        </section>
+
+        <section style="padding: 10px 0; border: none;">
+            <div class="hero-block">
+                <h2>Te presentamos VentaLista</h2>
+                <p>
+                    Un sistema directo que convierte tu WhatsApp en una herramienta automatizada donde el cliente entiende tu negocio, elige lo que busca y te envía el pedido listo.
+                </p>
+                
+                <div class="video-container">
+                    <video controls poster="faviconventalista.png">
+                        <source src="videoventalista.mp4" type="video/mp4">
+                        Tu navegador no soporta la reproducción de video.
+                    </video>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Beneficios</h2>
+            <ul class="benefits-grid">
+                <li><span class="benefit-number">1</span><div>Menos preguntas repetidas</div></li>
+                <li><span class="benefit-number">2</span><div>Más pedidos claros</div></li>
+                <li><span class="benefit-number">3</span><div>Más tiempo libre</div></li>
+                <li><span class="benefit-number">4</span><div>Imagen profesional</div></li>
+                <li><span class="benefit-number">5</span><div>Menos curiosos</div></li>
+                <li><span class="benefit-number">6</span><div>Mejor cierre de ventas</div></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Cómo funciona</h2>
+            <div class="step-flow">
+                <div class="step">
+                    <span class="step-dot"></span>
+                    <div>Tú compartes tu enlace de VentaLista en WhatsApp, TikTok, IG o FB.</div>
+                </div>
+                <div class="arrow">↓</div>
+                <div class="step">
+                    <span class="step-dot"></span>
+                    <div>El cliente accede instantáneamente sin necesidad de descargar aplicaciones.</div>
+                </div>
+                <div class="arrow">↓</div>
+                <div class="step">
+                    <span class="step-dot"></span>
+                    <div>Revisa tus productos con precios claros y selecciona su pedido.</div>
+                </div>
+                <div class="arrow">↓</div>
+                <div class="step">
+                    <span class="step-dot"></span>
+                    <div>El sistema genera un mensaje automático detallado listo para enviar.</div>
+                </div>
+                <div class="arrow">↓</div>
+                <div class="step">
+                    <span class="step-dot"></span>
+                    <div>Tú solo compartes tu cuenta Yape, Plin o banco para finalizar.</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>En 24 horas recibes</h2>
+            <div class="grid">
+                <div class="grid-item">Enlace personalizado</div>
+                <div class="grid-item">Código QR listo</div>
+                <div class="grid-item">Guía de operación</div>
+            </div>
+
+            <h3 style="margin-top: 32px; font-size: 1.3rem;">Puedes agregar:</h3>
+            <ul class="include-list">
+                <li>• Botón con redirección directa a tu WhatsApp centralizado.</li>
+                <li>• Geolocalización enlazada con Google Maps.</li>
+                <li>• Interconexión directa con los perfiles de tus redes sociales oficiales.</li>
+                <li>• Interfaz optimizada y soporte técnico de configuración.</li>
+                <li>• Estructura adaptada para un volumen inicial de hasta 10 productos principales.</li>
+            </ul>
+        </section>
+
+        <section style="border-bottom: none;">
+            <div class="offer-box">
+                <h2 style="margin-top: 0;">¿Listo para ordenar tu negocio?</h2>
+                <div class="price">S/300 <span style="font-size: 1.1rem; font-weight: 500; color: #64748b;">/ año de servicio</span></div>
+                <p style="font-size: 1.05rem; margin-bottom: 24px;">Incluye <strong>Diseño</strong> y <strong>Hosting</strong>.</p>
+                <p style="color: var(--primary); font-weight: 700; font-size: 1.1rem;">Tu plataforma estará completamente operativa en 24 horas.</p>
+                
+                <a href="https://wa.me/51913642644?text=Hola,%20quiero%20información%20de%20VentaLista" class="btn-whatsapp" target="_blank">
+                    Solicitar VentaLista vía WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 VentaLista. Infraestructura y diseño comercial.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
