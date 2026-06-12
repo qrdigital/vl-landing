@@ -1,3 +1,6 @@
+Aquí tienes tu código corregido únicamente en la sección del video (líneas de CSS y estructura HTML) para que adopte su formato vertical nativo y se vea grande en celulares:
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -121,18 +124,18 @@
         }
 
         .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            margin-top: 24px;
+            width: 100%;
+            max-width: 340px;
+            margin: 24px auto 0 auto;
             border-radius: 12px;
+            overflow: hidden;
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
         }
 
         .video-container video {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            width: 100%;
+            height: auto;
+            display: block;
             border: none;
         }
 
@@ -321,11 +324,12 @@
                 <p>
                     Un sistema directo que convierte tu WhatsApp en una herramienta automatizada donde el cliente entiende tu negocio, elige lo que busca y te envía el pedido listo.
                 </p>
-  <div class="video-container">
-    <video controls poster="https://qrdigital.github.io/vl-landing/faviconventalista.png">
-        <source src="https://qrdigital.github.io/vl-landing/videoventalista.mp4" type="video/mp4">
-    </video>
-</div>
+                <div class="video-container">
+                    <video controls poster="https://qrdigital.github.io/vl-landing/faviconventalista.png">
+                        <source src="https://qrdigital.github.io/vl-landing/videoventalista.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
         </section>
 
         <section>
@@ -383,17 +387,16 @@
                 <li>• Botón con redirección directa a tu WhatsApp centralizado.</li>
                 <li>• Geolocalización enlazada con Google Maps.</li>
                 <li>• Interconexión directa con los perfiles de tus redes sociales oficiales.</li>
-                <li>• Interfaz optimizada y soporte técnico de configuración.</li>
-                <li>• Estructura adaptada para un volumen inicial de hasta 10 productos principales.</li>
-            </ul>
+                <li>• Selector de productos, fecha y hora.</li>
+                          </ul>
         </section>
 
         <section style="border-bottom: none;">
             <div class="offer-box">
-                <h2 style="margin-top: 0;">¿Listo para ordenar tu negocio?</h2>
+                <h2 style="margin-top: 0;">Empieza a cerrar ventas</h2>
                 <div class="price">S/300 <span style="font-size: 1.1rem; font-weight: 500; color: #64748b;">/ año de servicio</span></div>
                 <p style="font-size: 1.05rem; margin-bottom: 24px;">Incluye <strong>Diseño</strong> y <strong>Hosting</strong>.</p>
-                <p style="color: var(--primary); font-weight: 700; font-size: 1.1rem;">Tu plataforma estará completamente operativa en 24 horas.</p>
+                <p style="color: var(--primary); font-weight: 700; font-size: 1.1rem;">Apertura veloz en celular</p>
                 
                 <a href="https://wa.me/51913642644?text=Hola,%20quiero%20información%20de%20VentaLista" class="btn-whatsapp" target="_blank">
                     Solicitar VentaLista vía WhatsApp
@@ -410,5 +413,4 @@
 </body>
 </html>
 
-
-
+```
