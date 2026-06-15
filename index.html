@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
     <!-- Etiquetas para la vista previa de WhatsApp -->
-<meta property="og:title" content="VentaLista - Ordena tus Ventas por WhatsApp">
-<meta property="og:description" content="Un sistema directo que convierte tu WhatsApp en una herramienta automatizada.">
-<meta property="og:image" content="https://qrdigital.github.io/vl-landing/logoventalista.jpg">
-<meta property="og:url" content="https://ventalista.lat/vl">
+    <meta property="og:title" content="VentaLista - Ordena tus Ventas por WhatsApp">
+    <meta property="og:description" content="Un sistema directo que convierte tu WhatsApp en una herramienta automatizada.">
+    <meta property="og:image" content="https://qrdigital.github.io/vl-landing/logoventalista.jpg">
+    <meta property="og:url" content="https://ventalista.lat/vl">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VentaLista - Ordena tus Ventas por WhatsApp</title>
@@ -101,6 +101,26 @@
             border-left: 5px solid #f59e0b;
         }
 
+        /* 1. Indicador de Scroll Animado */
+        .scroll-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top: 25px;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            font-weight: 600;
+            gap: 5px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+
         .hero-block {
             background-color: var(--dark);
             color: #ffffff;
@@ -159,7 +179,6 @@
             box-sizing: border-box;
         }
 
-        /* Punto verde exclusivo para el flujo */
         .step-dot {
             width: 8px;
             height: 8px;
@@ -177,12 +196,13 @@
             text-align: center;
         }
 
-        /* Sección de Beneficios con números circulares */
+        /* 2. Sección de Beneficios Interactivos */
         .benefits-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
             padding: 0;
+            margin: 0;
             list-style: none;
         }
 
@@ -190,20 +210,33 @@
             .benefits-grid { grid-template-columns: 1fr; }
         }
 
-        .benefits-grid li {
+        .benefit-item {
+            display: flex;
+            flex-direction: column;
             background: #ffffff;
             border: 1px solid var(--border);
-            padding: 16px 20px;
             border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            transition: border-color 0.2s ease;
+        }
+
+        .benefit-header {
+            padding: 16px 20px;
             font-weight: 600;
             color: var(--dark);
             display: flex;
             align-items: center;
             gap: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            cursor: pointer;
+            user-select: none;
+            background: #ffffff;
         }
 
-        /* El número oscuro con fondo circular para Beneficios */
+        .benefit-header:hover {
+            background: var(--light);
+        }
+
         .benefit-number {
             background: var(--dark);
             color: #ffffff;
@@ -216,6 +249,105 @@
             font-size: 0.85rem;
             font-weight: bold;
             flex-shrink: 0;
+            transition: background-color 0.2s ease;
+        }
+
+        .benefit-item.active .benefit-number {
+            background: var(--primary);
+        }
+
+        .benefit-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: var(--light);
+        }
+
+        .benefit-text {
+            padding: 0 20px 16px 20px;
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* 3. Estilos para FAQs y Contrato Desplegables */
+        .accordion-section {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 18px 24px;
+            font-weight: 700;
+            color: var(--dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            background: #ffffff;
+            border-bottom: 1px solid transparent;
+        }
+
+        .accordion-header:hover {
+            background: var(--light);
+        }
+
+        .accordion-icon {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--text);
+            transition: transform 0.2s ease;
+        }
+
+        .accordion-section.active .accordion-icon {
+            transform: rotate(45deg);
+        }
+
+        .accordion-section.active .accordion-header {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .accordion-body {
+            padding: 20px 24px;
+            font-size: 0.95rem;
+            color: var(--text);
+            background: #ffffff;
+        }
+
+        /* Formato de texto del contrato */
+        .contract-text {
+            font-size: 0.85rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+            white-space: pre-line;
+            color: #475569;
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 8px;
+            background: var(--light);
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+        }
+        .faq-item:last-child {
+            margin-bottom: 0;
+        }
+        .faq-question {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 4px;
         }
 
         .grid {
@@ -306,12 +438,18 @@
             <h2>¿Tus clientes preguntan mucho y compran poco?</h2>
             <ul class="quiz-list">
                 <li>Respondes exactamente lo mismo todos los días de forma manual.</li>
-                <li>Envías ráfagas de fotos sueltas que saturan y confunden2.</li>
+                <li>Envías ráfagas de fotos sueltas que saturan y confunden.</li>
                 <li>Compartes PDFs pesados que tus clientes evitan descargar.</li>
             </ul>
             
             <div class="diagnosis">
                 Tus clientes no deberían preguntar. Deberían comprar.
+            </div>
+
+            <!-- 1. Indicador visual para hacer scroll -->
+            <div class="scroll-indicator">
+                <span>Desliza hacia abajo para saber más</span>
+                <div>↓</div>
             </div>
         </section>
 
@@ -319,7 +457,7 @@
             <div class="hero-block">
                 <h2>Te presentamos VentaLista</h2>
                 <p>
-                    Un sistema de ventas ligero para WhatsApp que organiza tu negocio en un solo enlace y convierte consultas en pedidos claros.
+                    Un sistema de ventas ligero para WhatsApp que organizes tu negocio en un solo enlace y convierte consultas en pedidos claros.
                 </p>
                 <div class="video-container">
                     <video controls poster="https://qrdigital.github.io/vl-landing/faviconventalista.png">
@@ -329,16 +467,72 @@
             </div>
         </section>
 
+        <!-- 2. Sección de Beneficios Optimizada e Interactiva -->
         <section>
-            <h2>Beneficios</h2>
-            <ul class="benefits-grid">
-                <li><span class="benefit-number">1</span><div>Menos preguntas repetidas</div></li>
-                <li><span class="benefit-number">2</span><div>Más pedidos claros</div></li>
-                <li><span class="benefit-number">3</span><div>Cero configuracion para ti</div></li>
-                <li><span class="benefit-number">4</span><div>Actualizaciones al instante</div></li>
-                <li><span class="benefit-number">5</span><div>Enlace Inmortal</div></li>
-                <li><span class="benefit-number">6</span><div>Tu VentaLista lista en 24 horas</div></li>
-            </ul>
+            <h2>Beneficios (Toca para ver el detalle)</h2>
+            <div class="benefits-grid">
+                
+                <div class="benefit-item">
+                    <div class="benefit-header" onclick="toggleBenefit(this)">
+                        <span class="benefit-number">1</span>
+                        <div>Menos preguntas repetidas</div>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-text">Filtra automáticamente las dudas frecuentes sobre precios, stock o catálogo de tus productos de un solo golpe visual.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-header" onclick="toggleBenefit(this)">
+                        <span class="benefit-number">2</span>
+                        <div>Más pedidos claros</div>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-text">Tus clientes estructuran su carrito de compras y te lo envían todo listo en un solo mensaje organizado. No más malentendidos.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-header" onclick="toggleBenefit(this)">
+                        <span class="benefit-number">3</span>
+                        <div>Ideal para IG, FB y TikTok</div>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-text">El enlace único se acopla perfectamente a tus biografías de redes sociales o respuestas automatizadas para capturar cada cliente al instante.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-header" onclick="toggleBenefit(this)">
+                        <span class="benefit-number">4</span>
+                        <div>Actualizaciones rápidas en 1 hora</div>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-text">¿Cambio de stock o precios? Nos envías los nuevos datos por chat y lo dejamos listo en un plazo garantizado de 1 hora.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-header" onclick="toggleBenefit(this)">
+                        <span class="benefit-number">5</span>
+                        <div>Enlace Inmortal</div>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-text">Alojamiento y hosting con infraestructura comercial robusta para garantizar que tu sistema esté online las 24 horas del día.</div>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-header" onclick="toggleBenefit(this)">
+                        <span class="benefit-number">6</span>
+                        <div>Tu VentaLista lista en 24 horas</div>
+                    </div>
+                    <div class="benefit-content">
+                        <div class="benefit-text">Una vez confirmada la entrega de tu información, configuramos el diseño completo y te lo entregamos funcionando en solo 1 día.</div>
+                    </div>
+                </div>
+
+            </div>
         </section>
 
         <section>
@@ -362,7 +556,7 @@
                 <div class="step">
                     <span class="step-dot"></span>
                     <div>El sistema genera un mensaje automático detallado listo para enviar.</div>
-                 </div>
+                </div>
             </div>
         </section>
 
@@ -380,7 +574,89 @@
                 <li>• Geolocalización enlazada con Google Maps.</li>
                 <li>• Interconexión directa con tus redes sociales.</li>
                 <li>• Selector de productos, fecha y hora.</li>
-                          </ul>
+            </ul>
+        </section>
+
+        <!-- 3. Secciones Adicionales: Preguntas Frecuentes y Copia de Contrato -->
+        <section>
+            <h2>Garantías e Información General</h2>
+
+            <!-- Bloque Desplegable de Preguntas Frecuentes -->
+            <div class="accordion-section">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>Preguntas Frecuentes (FAQs)</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <div class="faq-item">
+                            <div class="faq-question">¿Tengo que configurar el sistema yo mismo?</div>
+                            <div class="faq-answer">No. Tú solo nos envías tus textos, fotos y precios; nosotros nos encargamos del diseño, hosting y de dejarlo operativo al 100%.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">¿Mis clientes necesitan descargar una aplicación?</div>
+                            <div class="faq-answer">No, funciona de forma nativa a través de cualquier navegador web desde su celular con una velocidad de carga inmediata.</div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">¿Cómo se gestionan los pagos?</div>
+                            <div class="faq-answer">El sistema genera el pedido detallado. Puedes incluir una sección informativa de tus cuentas (Yape, Plin o bancos) para cerrar la transacción.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bloque Desplegable de Copia de Contrato -->
+            <div class="accordion-section">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <span>Copia Transparente del Contrato de Servicio</span>
+                    <span class="accordion-icon">+</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-body">
+                        <div class="contract-text">
+<strong>CONTRATO DE SERVICIO – VENTALISTA DE FLOWLITE</strong>
+
+<strong>1. IDENTIFICACIÓN DE LAS PARTES</strong>
+EL PROVEEDOR, identificado con RUC 10409113431 con nombre comercial FlowLite Systems representado por Ricardo Respaldiza Moya y EL CLIENTE.
+
+<strong>2. OBJETO DEL SERVICIO</strong>
+EL PROVEEDOR se compromete a desarrollar un catálogo digital denominado VentaLista, diseñado para facilitar la presentación de productos y el cierre de ventas mediante enlace directo a WhatsApp.
+El servicio incluye: Hasta 10 imágenes con descripción, Sección de oferta especial, Integración de ubicación (Google Maps), Integración redes sociales, Botón de contacto directo, Selección múltiple de productos, Entrega de 1 enlace web y 1 código QR, Guía Operativa.
+
+<strong>3. INICIO Y PLAZOS</strong>
+El servicio inicia dentro de las 24 horas posteriores a la confirmación del pago del adelanto y la entrega completa del material. El tiempo de entrega es de 24 horas desde la recepción total del contenido. Si EL CLIENTE no entrega el material en un plazo máximo de 15 días hábiles, se podrá dar por finalizado el servicio sin devolución.
+
+<strong>4. INVERSIÓN Y FORMA DE PAGO</strong>
+Costo del servicio: S/300 (vigencia de 1 año). Incluye: Desarrollo, Dominio y Hosting. Forma de pago: 50% de adelanto y 50% contra entrega. El incumplimiento del pago final faculta la suspensión inmediata del servicio.
+
+<strong>5. VIGENCIA</strong>
+El servicio tiene una duración de 12 meses desde la fecha de entrega. Finalizado este periodo, el servicio podrá renovarse opcionalmente.
+
+<strong>6. PROPIEDAD Y USO DEL CONTENIDO</strong>
+Las imágenes, textos y materiales proporcionados son propiedad de EL CLIENTE. En caso de no renovación, el VentaLista será dado de baja.
+
+<strong>7. PROPIEDAD DEL SISTEMA</strong>
+El código, estructura y plantillas del VentaLista son propiedad exclusiva de FLOWLITE. EL CLIENTE adquiere una licencia de uso.
+
+<strong>8. ACTUALIZACIONES</strong>
+Garantía de dos (2) solicitudes de actualizaciones gratuitas durante los primeros siete (7) días calendario posteriores a la entrega. Las modificaciones fuera de este periodo tendrán un costo de S/10 por solicitud o adquirir un paquete de 24 actualizaciones por S/100 (Aplica para cambios de imágenes, precios y descripciones. No incluye cambio de rubro o nombre). Las actualizaciones solicitadas se procesarán con un tiempo de respuesta de hasta 1 hora dentro del horario comercial.
+
+<strong>9. SOPORTE TÉCNICO</strong>
+La regeneración de enlace o código QR por pérdida o descuido tendrá un costo de S/10.
+
+<strong>10. CANCELACIÓN DEL SERVICIO</strong>
+EL CLIENTE podrá solicitar la baja del servicio en cualquier momento sin que esto genere devoluciones ni prorrateos.
+
+<strong>11. LIMITACIÓN DE RESPONSABILIDAD</strong>
+EL PROVEEDOR no garantiza volumen de ventas ni se responsabiliza por caídas de servicios externos como WhatsApp o redes de conectividad de terceros.
+
+<strong>12. ACEPTACIÓN</strong>
+La aceptación del servicio y/o el pago del adelanto implica la conformidad total con los presentes términos.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <section style="border-bottom: none;">
@@ -397,10 +673,47 @@
         </section>
 
         <footer>
-            <p>&copy; 2025 VentaLista. Infraestructura y diseño comercial.</p>
+            <p>&copy; 2026 VentaLista. Infraestructura y diseño comercial.</p>
         </footer>
 
     </div>
+
+    <!-- JavaScript para manejar la interactividad dinámicamente -->
+    <script>
+        // Función para controlar la apertura de los detalles de beneficios
+        function toggleBenefit(element) {
+            const item = element.parentElement;
+            const content = item.querySelector('.benefit-content');
+            
+            if (item.classList.contains('active')) {
+                content.style.maxHeight = null;
+                item.classList.remove('active');
+            } else {
+                // Opcional: cierra los otros beneficios abiertos para mantener limpieza
+                document.querySelectorAll('.benefit-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.benefit-content').style.maxHeight = null;
+                });
+                
+                item.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+
+        // Función para controlar los bloques principales de FAQs y Contrato
+        function toggleAccordion(element) {
+            const section = element.parentElement;
+            const content = section.querySelector('.accordion-content');
+            
+            if (section.classList.contains('active')) {
+                content.style.maxHeight = null;
+                section.classList.remove('active');
+            } else {
+                section.classList.add('active');
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+    </script>
 
 </body>
 </html>
