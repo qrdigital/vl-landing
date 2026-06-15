@@ -38,6 +38,7 @@
             max-width: 680px; 
             margin: 0 auto;
             padding: 24px;
+            position: relative;
         }
 
         header {
@@ -101,24 +102,60 @@
             border-left: 5px solid #f59e0b;
         }
 
-        /* 1. Indicador de Scroll Animado */
-        .scroll-indicator {
+        /* Barra Lateral de Scroll Sutil (Sin Texto) */
+        .scroll-sidebar {
+            position: fixed;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            margin-top: 25px;
-            color: #94a3b8;
-            font-size: 0.9rem;
-            font-weight: 600;
-            gap: 5px;
-            animation: bounce 2s infinite;
+            gap: 12px;
+            z-index: 100;
+            opacity: 0.7;
         }
 
-        @keyframes bounce {
+        .scroll-line {
+            width: 2px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+            position: relative;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .scroll-line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: var(--dark);
+            animation: scrollMove 2s infinite linear;
+        }
+
+        @keyframes scrollMove {
+            0% { transform: translateY(-20px); }
+            100% { transform: translateY(60px); }
+        }
+
+        .scroll-arrow {
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: bold;
+            animation: bounceArrow 2s infinite;
+        }
+
+        @keyframes bounceArrow {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-8px); }
-            60% { transform: translateY(-4px); }
+            40% { transform: translateY(-4px); }
+            60% { transform: translateY(-2px); }
+        }
+
+        @media (max-width: 768px) {
+            .scroll-sidebar { right: 8px; }
         }
 
         .hero-block {
@@ -173,10 +210,33 @@
             color: var(--dark);
             border: 1px solid var(--border);
             display: flex;
-            align-items: center;
-            gap: 16px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
             width: 100%;
             box-sizing: border-box;
+        }
+
+        .step-title-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .step-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            font-family: 'Outfit', sans-serif;
+            color: var(--dark);
+        }
+
+        .step-desc {
+            font-size: 0.95rem;
+            font-weight: 400;
+            color: var(--text);
+            padding-left: 20px;
+            line-height: 1.4;
         }
 
         .step-dot {
@@ -196,7 +256,7 @@
             text-align: center;
         }
 
-        /* 2. Sección de Beneficios Interactivos */
+        /* Sección de Beneficios Interactivos */
         .benefits-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -270,7 +330,7 @@
             line-height: 1.5;
         }
 
-        /* 3. Estilos para FAQs y Contrato Desplegables */
+        /* Estilos para FAQs y Contrato Desplegables */
         .accordion-section {
             background: var(--light);
             border: 1px solid var(--border);
@@ -352,19 +412,32 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 12px;
+            grid-template-columns: 1fr;
+            gap: 16px;
             margin: 20px 0;
         }
 
-        .grid-item {
+        .grid-item-block {
             background: var(--light);
-            padding: 16px;
-            border-radius: 10px;
-            text-align: center;
-            font-weight: 700;
-            color: var(--dark);
+            padding: 20px 24px;
+            border-radius: 12px;
             border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .grid-item-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .grid-item-desc {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.4;
         }
 
         .include-list {
@@ -428,6 +501,12 @@
 </head>
 <body>
 
+    <!-- Barra lateral visual para indicar scroll (limpia, sin texto obstructivo) -->
+    <div class="scroll-sidebar">
+        <div class="scroll-line"></div>
+        <div class="scroll-arrow">↓</div>
+    </div>
+
     <div class="container">
         
         <header>
@@ -445,19 +524,13 @@
             <div class="diagnosis">
                 Tus clientes no deberían preguntar. Deberían comprar.
             </div>
-
-            <!-- 1. Indicador visual para hacer scroll -->
-            <div class="scroll-indicator">
-                <span>Desliza hacia abajo para saber más</span>
-                <div>↓</div>
-            </div>
         </section>
 
         <section style="padding: 10px 0; border: none;">
             <div class="hero-block">
                 <h2>Te presentamos VentaLista</h2>
                 <p>
-                    Un sistema de ventas ligero para WhatsApp que organizes tu negocio en un solo enlace y convierte consultas en pedidos claros.
+                    Un sistema de ventas ligero para WhatsApp que organiza tu negocio en un solo enlace y convierte consultas en pedidos claros.
                 </p>
                 <div class="video-container">
                     <video controls poster="https://qrdigital.github.io/vl-landing/faviconventalista.png">
@@ -467,7 +540,7 @@
             </div>
         </section>
 
-        <!-- 2. Sección de Beneficios Optimizada e Interactiva -->
+        <!-- Sección de Beneficios Interactiva -->
         <section>
             <h2>Beneficios (Toca para ver el detalle)</h2>
             <div class="benefits-grid">
@@ -488,7 +561,7 @@
                         <div>Más pedidos claros</div>
                     </div>
                     <div class="benefit-content">
-                        <div class="benefit-text">Tus clientes estructuran su carrito de compras y te lo envían todo listo en un solo mensaje organizado. No más malentendidos.</div>
+                        <div class="benefit-text">Tus clientes estructuran su pedido y te lo envían todo listo en un solo mensaje organizado. No más malentendidos.</div>
                     </div>
                 </div>
 
@@ -539,33 +612,54 @@
             <h2>Cómo funciona</h2>
             <div class="step-flow">
                 <div class="step">
-                    <span class="step-dot"></span>
-                    <div>Tú compartes tu enlace de VentaLista en WhatsApp, TikTok, IG o FB.</div>
+                    <div class="step-title-container">
+                        <span class="step-dot"></span>
+                        <div class="step-title">Compartes</div>
+                    </div>
+                    <div class="step-desc">Pones tu enlace de VentaLista en WhatsApp, TikTok, Instagram o Facebook.</div>
                 </div>
                 <div class="arrow">↓</div>
                 <div class="step">
-                    <span class="step-dot"></span>
-                    <div>El cliente accede sin necesidad de descargar Apps, PDFs, ni Fotos.</div>
+                    <div class="step-title-container">
+                        <span class="step-dot"></span>
+                        <div class="step-title">El Cliente Accede</div>
+                    </div>
+                    <div class="step-desc">Ingresa al instante desde cualquier navegador sin descargar aplicaciones, PDFs molestos ni llenar la memoria con fotos.</div>
                 </div>
                 <div class="arrow">↓</div>
                 <div class="step">
-                    <span class="step-dot"></span>
-                    <div>Revisa tus productos con precios claros y selecciona su pedido.</div>
+                    <div class="step-title-container">
+                        <span class="step-dot"></span>
+                        <div class="step-title">Selecciona</div>
+                    </div>
+                    <div class="step-desc">Revisa tus productos actualizados con precios claros y arma su pedido directamente en el sistema.</div>
                 </div>
                 <div class="arrow">↓</div>
                 <div class="step">
-                    <span class="step-dot"></span>
-                    <div>El sistema genera un mensaje automático detallado listo para enviar.</div>
+                    <div class="step-title-container">
+                        <span class="step-dot"></span>
+                        <div class="step-title">Recibes</div>
+                    </div>
+                    <div class="step-desc">Te llega un mensaje de WhatsApp automático, perfectamente detallado y listo para procesar.</div>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2>En 24 horas recibes</h2>
+            <h2>En 24 horas recibes:</h2>
             <div class="grid">
-                <div class="grid-item">Enlace personalizado</div>
-                <div class="grid-item">QR del enlace</div>
-                <div class="grid-item">Guía de operación</div>
+                <div class="grid-item-block">
+                    <div class="grid-item-title">1. Enlace Personalizado</div>
+                    <div class="grid-item-desc">Un enlace único con el nombre de tu negocio. Lo pondrás en tus redes sociales para centralizar y ordenar toda tu comunicación en WhatsApp.</div>
+                </div>
+                <div class="grid-item-block">
+                    <div class="grid-item-title">2. Código QR Listo para Imprimir</div>
+                    <div class="grid-item-desc">Dirige directamente a tu enlace personalizado. Solo debes imprimirlo y colocarlo en un lugar visible de tu local físico o adherido a cada uno de tus productos.</div>
+                </div>
+                <div class="grid-item-block">
+                    <div class="grid-item-title">3. Guía Estratégica de Operación</div>
+                    <div class="grid-item-desc">El paso a paso exacto para desplegar tu sistema, configurar respuestas rápidas y empezar a desviar el tráfico de preguntones hacia ventas cerradas desde el primer día.</div>
+                </div>
             </div>
 
             <h3 style="margin-top: 32px; font-size: 1.3rem;">Puedes agregar:</h3>
@@ -577,7 +671,7 @@
             </ul>
         </section>
 
-        <!-- 3. Secciones Adicionales: Preguntas Frecuentes y Copia de Contrato -->
+        <!-- Secciones Adicionales: Preguntas Frecuentes y Copia de Contrato -->
         <section>
             <h2>Garantías e Información General</h2>
 
@@ -689,7 +783,6 @@ La aceptación del servicio y/o el pago del adelanto implica la conformidad tota
                 content.style.maxHeight = null;
                 item.classList.remove('active');
             } else {
-                // Opcional: cierra los otros beneficios abiertos para mantener limpieza
                 document.querySelectorAll('.benefit-item').forEach(i => {
                     i.classList.remove('active');
                     i.querySelector('.benefit-content').style.maxHeight = null;
