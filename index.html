@@ -1,7 +1,9 @@
+Aquí tienes el código modificado. He reubicado el bloque de la oferta (`.offer-box`) exactamente arriba de la sección de Garantías e Información General, ajustando también los bordes inferiores de las etiquetas `<section>` correspondientes para mantener el orden visual limpio.
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- Etiquetas para la vista previa de WhatsApp -->
     <meta property="og:title" content="VentaLista - Ordena tus Ventas por WhatsApp">
     <meta property="og:description" content="Un sistema directo que convierte tu WhatsApp en una herramienta automatizada.">
     <meta property="og:image" content="https://qrdigital.github.io/vl-landing/logoventalista.jpg">
@@ -501,7 +503,6 @@
 </head>
 <body>
 
-    <!-- Barra lateral visual para indicar scroll (limpia, sin texto obstructivo) -->
     <div class="scroll-sidebar">
         <div class="scroll-line"></div>
         <div class="scroll-arrow">↓</div>
@@ -540,7 +541,6 @@
             </div>
         </section>
 
-        <!-- Sección de Beneficios Interactiva -->
         <section>
             <h2>Beneficios (Toca para ver el detalle)</h2>
             <div class="benefits-grid">
@@ -671,11 +671,22 @@
             </ul>
         </section>
 
-        <!-- Secciones Adicionales: Preguntas Frecuentes y Copia de Contrato -->
         <section>
+            <div class="offer-box" style="margin: 0;">
+                <h2 style="margin-top: 0;">Empieza a cerrar ventas</h2>
+                <div class="price">S/300 <span style="font-size: 1.1rem; font-weight: 500; color: #64748b;">/ año de servicio</span></div>
+                <p style="font-size: 1.05rem; margin-bottom: 24px;">Tú envías la información, nosotros hacemos el resto.</p>
+                <p style="color: var(--primary); font-weight: 700; font-size: 1.1rem;">Creamos tu VentaLista y la dejamos funcionando.</p>
+                
+                <a href="https://wa.me/51913642644?text=Hola,%20quiero%20información%20de%20VentaLista" class="btn-whatsapp" target="_blank">
+                    Solicitar VentaLista vía WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <section style="border-bottom: none;">
             <h2>Garantías e Información General</h2>
 
-            <!-- Bloque Desplegable de Preguntas Frecuentes -->
             <div class="accordion-section">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
                     <span>Preguntas Frecuentes (FAQs)</span>
@@ -699,10 +710,9 @@
                 </div>
             </div>
 
-            <!-- Bloque Desplegable de Copia de Contrato -->
             <div class="accordion-section">
                 <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>Copia Transparente del Contrato de Servicio</span>
+                    <span>Contrato de Servicio</span>
                     <span class="accordion-icon">+</span>
                 </div>
                 <div class="accordion-content">
@@ -753,26 +763,12 @@ La aceptación del servicio y/o el pago del adelanto implica la conformidad tota
 
         </section>
 
-        <section style="border-bottom: none;">
-            <div class="offer-box">
-                <h2 style="margin-top: 0;">Empieza a cerrar ventas</h2>
-                <div class="price">S/300 <span style="font-size: 1.1rem; font-weight: 500; color: #64748b;">/ año de servicio</span></div>
-                <p style="font-size: 1.05rem; margin-bottom: 24px;">Tú envías la información, nosotros hacemos el resto.</p>
-                <p style="color: var(--primary); font-weight: 700; font-size: 1.1rem;">Creamos tu VentaLista y la dejamos funcionando.</p>
-                
-                <a href="https://wa.me/51913642644?text=Hola,%20quiero%20información%20de%20VentaLista" class="btn-whatsapp" target="_blank">
-                    Solicitar VentaLista vía WhatsApp
-                </a>
-            </div>
-        </section>
-
         <footer>
             <p>&copy; 2026 VentaLista. Infraestructura y diseño comercial.</p>
         </footer>
 
     </div>
 
-    <!-- JavaScript para manejar la interactividad dinámicamente -->
     <script>
         // Función para controlar la apertura de los detalles de beneficios
         function toggleBenefit(element) {
@@ -810,3 +806,5 @@ La aceptación del servicio y/o el pago del adelanto implica la conformidad tota
 
 </body>
 </html>
+
+```
