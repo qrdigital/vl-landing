@@ -2,15 +2,17 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>VentaLista - Tu Sistema de Pedidos</title>
     
     <!-- Meta tags para vista previa en WhatsApp -->
     <meta property="og:title" content="VentaLista - Tu Sistema de Pedidos">
     <meta property="og:description" content="Tus clientes no deberían preguntar. Deberían comprar. Un solo enlace para que tus clientes vean, elijan y pidan por WhatsApp.">
-    <meta property="og:image" content="logoinformacion.jpg">
+    <meta property="og:image" content="./logoinformacion.jpg">
     <meta property="og:url" content="https://ventalista.lat/informacion">
     <meta property="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="./faviconventalista.png">
 
     <style>
         * {
@@ -19,23 +21,27 @@
             padding: 0;
         }
 
-        body {
-            font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
             background-color: #0b1510;
             color: #ffffff;
+            font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             min-height: 100vh;
         }
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 600px; /* En PC se limita a 600px centrado */
             background-color: #0b1510;
             margin: 0 auto;
             position: relative;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
             padding-bottom: 20px;
         }
 
@@ -54,7 +60,7 @@
             display: block;
         }
 
-        /* Botón Ver Demo superpuesto en el banner de Demostración (donde indica la flecha) */
+        /* Botón Ver Demo superpuesto */
         .demo-container {
             position: relative;
             width: 100%;
@@ -63,7 +69,7 @@
         .btn-ver-demo {
             position: absolute;
             top: 72%;
-            right: 12%;
+            right: 8%;
             transform: translateY(-50%);
             background-color: #25D366;
             color: #ffffff;
@@ -96,7 +102,7 @@
             border-left: 10px solid #ffffff;
         }
 
-        /* Área de Pedido con el botón superpuesto al final */
+        /* Área de Pedido con el botón superpuesto */
         .pedido-container {
             position: relative;
             width: 100%;
@@ -187,14 +193,19 @@
             line-height: 1;
         }
 
-        @media (max-width: 480px) {
+        /* Optimización específica para teléfonos móviles */
+        @media (max-width: 600px) {
+            .container {
+                max-width: 100vw; /* Usar todo el ancho real de la pantalla del celular */
+            }
             .btn-ver-demo {
-                font-size: 13px;
+                font-size: 14px;
                 padding: 8px 14px;
+                right: 5%;
             }
             .btn-whatsapp-floating {
                 font-size: 16px;
-                padding: 13px 20px;
+                padding: 14px 20px;
                 width: 90%;
             }
         }
@@ -204,34 +215,34 @@
 
     <div class="container">
         
-        <!-- 1. Head (Con enlace a WhatsApp para acción inmediata) -->
+        <!-- 1. Head -->
         <div class="section-block">
             <a href="https://wa.me/51920832884?text=Hola,%20deseo%20solicitar%20mi%20VentaLista">
-                <img class="product-img" src="headinformacion.jpg" alt="VentaLista - Head Encabezado">
+                <img class="product-img" src="./headinformacion.jpg" alt="VentaLista - Head Encabezado">
             </a>
         </div>
 
         <!-- 2. Dolor -->
         <div class="section-block">
-            <img class="product-img" src="dolorinformacion.jpg" alt="VentaLista - Problema / Dolor">
+            <img class="product-img" src="./dolorinformacion.jpg" alt="VentaLista - Problema / Dolor">
         </div>
 
         <!-- 3. Deseo -->
         <div class="section-block">
-            <img class="product-img" src="deseoinformacion.jpg" alt="VentaLista - Deseo / Solución">
+            <img class="product-img" src="./deseoinformacion.jpg" alt="VentaLista - Deseo / Solución">
         </div>
 
-        <!-- 4. Demostración (Boton Ver Demo posicionado en la mujer) -->
+        <!-- 4. Demostración -->
         <div class="section-block demo-container">
-            <img class="product-img" src="demostracioninformacion.jpg" alt="VentaLista - Demostración del sistema">
+            <img class="product-img" src="./demostracioninformacion.jpg" alt="VentaLista - Demostración del sistema">
             <button class="btn-ver-demo" onclick="openVideoModal()">
                 <span class="play-icon"></span> Ver Demo
             </button>
         </div>
 
-        <!-- 5. Pedido / Oferta con Botón WhatsApp montado encima -->
+        <!-- 5. Pedido / Oferta -->
         <div class="section-block pedido-container">
-            <img class="product-img" src="pedidoinformacion.jpg" alt="VentaLista - Oferta y Pedido">
+            <img class="product-img" src="./pedidoinformacion.jpg" alt="VentaLista - Oferta y Pedido">
             
             <a href="https://wa.me/51920832884?text=Hola,%20deseo%20solicitar%20mi%20VentaLista" class="btn-whatsapp-floating" target="_blank">
                 <svg class="ws-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
@@ -248,7 +259,7 @@
         <div class="modal-content">
             <span class="close-btn" onclick="closeVideoModal()">&times;</span>
             <video id="demoVideo" controls>
-                <source src="videoinformacion.mp4" type="video/mp4">
+                <source src="./videoinformacion.mp4" type="video/mp4">
                 Tu navegador no soporta el formato de video.
             </video>
         </div>
