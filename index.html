@@ -1,802 +1,279 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta property="og:title" content="VentaLista - Ordena tus Ventas por WhatsApp">
-    <meta property="og:description" content="Un sistema directo que convierte tu WhatsApp en una herramienta automatizada.">
-    <meta property="og:image" content="https://qrdigital.github.io/vl-landing/logoventalista.jpg">
-    <meta property="og:url" content="https://ventalista.lat/vl">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VentaLista - Ordena tus Ventas por WhatsApp</title>
-    <link rel="icon" href="https://qrdigital.github.io/vl-landing/faviconventalista.png" type="image/png">
+    <title>VentaLista - Tu Sistema de Pedidos</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Plus+Jakarta+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <!-- Meta tags para vista previa en WhatsApp -->
+    <meta property="og:title" content="VentaLista - Tu Sistema de Pedidos">
+    <meta property="og:description" content="Tus clientes no deberían preguntar. Deberían comprar. Un solo enlace para que tus clientes vean, elijan y pidan por WhatsApp.">
+    <meta property="og:image" content="logoinformacion.jpg">
+    <meta property="og:url" content="https://ventalista.lat/informacion">
+    <meta property="og:type" content="website">
+
     <style>
-        :root {
-            --primary: #12b76a; 
-            --dark: #0f172a;    
-            --light: #f8fafc;   
-            --text: #334155;    
-            --border: #e2e8f0;
-        }
-        
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.6;
-            color: var(--text);
-            background-color: #ffffff;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #0b1510;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
 
         .container {
-            max-width: 680px; 
+            width: 100%;
+            max-width: 600px;
+            background-color: #0b1510;
             margin: 0 auto;
-            padding: 24px;
             position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            padding-bottom: 20px;
         }
 
-        header {
-            text-align: center;
-            padding: 35px 0 20px 0;
-        }
-
-        .logo {
-            max-width: 180px;
-            height: auto;
-        }
-
-        section {
-            padding: 48px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        h1, h2, h3 {
-            font-family: 'Outfit', sans-serif;
-            color: var(--dark);
-            font-weight: 800;
-            letter-spacing: -0.02em;
-        }
-
-        h2 { 
-            font-size: 1.75rem; 
-            margin-bottom: 24px; 
-            line-height: 1.25;
-        }
-
-        .quiz-list {
-            list-style: none;
+        .section-block {
+            position: relative;
+            width: 100%;
+            display: block;
+            margin: 0;
             padding: 0;
-            margin: 0 0 30px 0;
+            line-height: 0;
         }
 
-        .quiz-list li {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #475569;
-            margin-bottom: 12px;
-            padding-left: 24px;
-            position: relative;
-        }
-
-        .quiz-list li::before {
-            content: "—";
-            position: absolute;
-            left: 0;
-            color: #94a3b8;
-        }
-
-        .diagnosis {
-            background-color: #fef3c7;
-            color: #92400e;
-            padding: 24px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1.35rem;
-            line-height: 1.5;
-            border-left: 5px solid #f59e0b;
-        }
-
-        /* Barra Lateral de Scroll Sutil (Sin Texto) */
-        .scroll-sidebar {
-            position: fixed;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            z-index: 100;
-            opacity: 0.7;
-        }
-
-        .scroll-line {
-            width: 2px;
-            height: 60px;
-            background: linear-gradient(to bottom, var(--primary), transparent);
-            position: relative;
-            overflow: hidden;
-            border-radius: 2px;
-        }
-
-        .scroll-line::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: var(--dark);
-            animation: scrollMove 2s infinite linear;
-        }
-
-        @keyframes scrollMove {
-            0% { transform: translateY(-20px); }
-            100% { transform: translateY(60px); }
-        }
-
-        .scroll-arrow {
-            color: var(--primary);
-            font-size: 1.2rem;
-            font-weight: bold;
-            animation: bounceArrow 2s infinite;
-        }
-
-        @keyframes bounceArrow {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-4px); }
-            60% { transform: translateY(-2px); }
-        }
-
-        @media (max-width: 768px) {
-            .scroll-sidebar { right: 8px; }
-        }
-
-        .hero-block {
-            background-color: var(--dark);
-            color: #ffffff;
-            padding: 40px 32px;
-            border-radius: 16px;
-            margin: 20px 0;
-        }
-
-        .hero-block h2 {
-            color: #ffffff;
-            margin-top: 0;
-        }
-
-        .hero-block p {
-            color: #cbd5e1;
-            font-size: 1.2rem;
-            line-height: 1.7;
-        }
-
-        .video-container {
-            width: 100%;
-            max-width: 340px;
-            margin: 24px auto 0 auto;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);
-        }
-
-        .video-container video {
+        .product-img {
             width: 100%;
             height: auto;
             display: block;
-            border: none;
         }
 
-        /* Cómo funciona (Flujo) */
-        .step-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            align-items: center;
-            margin: 32px 0;
-        }
-
-        .step {
-            background: var(--light);
-            padding: 16px 24px;
-            border-radius: 12px;
-            font-weight: 600;
-            color: var(--dark);
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 4px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
-        .step-title-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        /* Botón Ver Demo superpuesto en el banner de Demostración (donde indica la flecha) */
+        .demo-container {
+            position: relative;
             width: 100%;
         }
 
-        .step-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            font-family: 'Outfit', sans-serif;
-            color: var(--dark);
-        }
-
-        .step-desc {
-            font-size: 0.95rem;
-            font-weight: 400;
-            color: var(--text);
-            padding-left: 20px;
-            line-height: 1.4;
-        }
-
-        .step-dot {
-            width: 8px;
-            height: 8px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            flex-shrink: 0;
-        }
-
-        .arrow {
-            color: var(--primary);
-            font-size: 1.8rem;
+        .btn-ver-demo {
+            position: absolute;
+            top: 72%;
+            right: 12%;
+            transform: translateY(-50%);
+            background-color: #25D366;
+            color: #ffffff;
             font-weight: bold;
-            line-height: 1;
-            margin: 4px 0;
-            text-align: center;
-        }
-
-        /* Sección de Beneficios Interactivos */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            padding: 0;
-            margin: 0;
-            list-style: none;
-        }
-
-        @media (max-width: 500px) {
-            .benefits-grid { grid-template-columns: 1fr; }
-        }
-
-        .benefit-item {
+            font-size: 15px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 2px solid #ffffff;
+            cursor: pointer;
             display: flex;
-            flex-direction: column;
-            background: #ffffff;
-            border: 1px solid var(--border);
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            z-index: 10;
+            text-decoration: none;
+            line-height: 1.2;
+        }
+
+        .btn-ver-demo:hover {
+            background-color: #1eb956;
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .play-icon {
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 10px solid #ffffff;
+        }
+
+        /* Área de Pedido con el botón superpuesto al final */
+        .pedido-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 30px;
+        }
+
+        .btn-whatsapp-floating {
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background-color: #25D366;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 16px 28px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+            width: 85%;
+            max-width: 420px;
+            z-index: 20;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-whatsapp-floating:hover {
+            background-color: #1eb956;
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .ws-icon {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+        }
+
+        /* Modal para reproducción de Video */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            background: #000;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-            transition: border-color 0.2s ease;
         }
 
-        .benefit-header {
-            padding: 16px 20px;
-            font-weight: 600;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 12px;
+        .modal-content video {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #fff;
+            font-size: 28px;
+            font-weight: bold;
             cursor: pointer;
-            user-select: none;
-            background: #ffffff;
-        }
-
-        .benefit-header:hover {
-            background: var(--light);
-        }
-
-        .benefit-number {
-            background: var(--dark);
-            color: #ffffff;
-            width: 28px;
-            height: 28px;
+            z-index: 1001;
+            background: rgba(0,0,0,0.5);
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.85rem;
-            font-weight: bold;
-            flex-shrink: 0;
-            transition: background-color 0.2s ease;
+            line-height: 1;
         }
 
-        .benefit-item.active .benefit-number {
-            background: var(--primary);
-        }
-
-        .benefit-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background: var(--light);
-        }
-
-        .benefit-text {
-            padding: 0 20px 16px 20px;
-            font-size: 0.95rem;
-            color: var(--text);
-            line-height: 1.5;
-        }
-
-        /* Estilos para FAQs y Contrato Desplegables */
-        .accordion-section {
-            background: var(--light);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 12px;
-            overflow: hidden;
-        }
-
-        .accordion-header {
-            padding: 18px 24px;
-            font-weight: 700;
-            color: var(--dark);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            user-select: none;
-            background: #ffffff;
-            border-bottom: 1px solid transparent;
-        }
-
-        .accordion-header:hover {
-            background: var(--light);
-        }
-
-        .accordion-icon {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--text);
-            transition: transform 0.2s ease;
-        }
-
-        .accordion-section.active .accordion-icon {
-            transform: rotate(45deg);
-        }
-
-        .accordion-section.active .accordion-header {
-            border-bottom: 1px solid var(--border);
-        }
-
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-
-        .accordion-body {
-            padding: 20px 24px;
-            font-size: 0.95rem;
-            color: var(--text);
-            background: #ffffff;
-        }
-
-        /* Formato de texto del contrato */
-        .contract-text {
-            font-size: 0.85rem;
-            max-height: 300px;
-            overflow-y: auto;
-            padding-right: 10px;
-            white-space: pre-line;
-            color: #475569;
-            border: 1px solid var(--border);
-            padding: 15px;
-            border-radius: 8px;
-            background: var(--light);
-        }
-
-        .faq-item {
-            margin-bottom: 16px;
-        }
-        .faq-item:last-child {
-            margin-bottom: 0;
-        }
-        .faq-question {
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 4px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 16px;
-            margin: 20px 0;
-        }
-
-        .grid-item-block {
-            background: var(--light);
-            padding: 20px 24px;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .grid-item-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: var(--dark);
-        }
-
-        .grid-item-desc {
-            font-size: 0.95rem;
-            color: var(--text);
-            line-height: 1.4;
-        }
-
-        .include-list {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0 0 0;
-        }
-
-        .include-list li {
-            padding: 8px 0;
-            border-bottom: 1px dashed var(--border);
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        .offer-box {
-            background: var(--light);
-            border: 2px solid var(--dark);
-            padding: 40px 24px;
-            border-radius: 16px;
-            text-align: center;
-            margin: 30px 0;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-        }
-
-        .price {
-            font-size: 3rem;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 800;
-            color: var(--dark);
-            margin: 10px 0;
-            letter-spacing: -0.03em;
-        }
-
-        .btn-whatsapp {
-            display: inline-block;
-            background-color: var(--primary);
-            color: white;
-            padding: 18px 40px;
-            font-size: 1.15rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 12px; 
-            transition: transform 0.2s ease, background-color 0.2s ease;
-            box-shadow: 0 4px 12px rgba(18, 183, 106, 0.25);
-            margin-top: 15px;
-        }
-
-        .btn-whatsapp:hover {
-            background-color: #109e5b;
-            transform: translateY(-1px);
-        }
-
-        footer {
-            text-align: center;
-            padding: 40px 0;
-            font-size: 0.85rem;
-            color: #94a3b8;
+        @media (max-width: 480px) {
+            .btn-ver-demo {
+                font-size: 13px;
+                padding: 8px 14px;
+            }
+            .btn-whatsapp-floating {
+                font-size: 16px;
+                padding: 13px 20px;
+                width: 90%;
+            }
         }
     </style>
 </head>
 <body>
 
-    <div class="scroll-sidebar">
-        <div class="scroll-line"></div>
-        <div class="scroll-arrow">↓</div>
-    </div>
-
     <div class="container">
         
-        <header>
-            <img src="https://qrdigital.github.io/vl-landing/logoventalista.jpg" alt="VentaLista Logo" class="logo">
-        </header>
+        <!-- 1. Head (Con enlace a WhatsApp para acción inmediata) -->
+        <div class="section-block">
+            <a href="https://wa.me/51920832884?text=Hola,%20deseo%20solicitar%20mi%20VentaLista">
+                <img class="product-img" src="headinformacion.jpg" alt="VentaLista - Head Encabezado">
+            </a>
+        </div>
 
-        <section>
-            <h2>¿Tus clientes preguntan mucho y compran poco?</h2>
-            <ul class="quiz-list">
-                <li>Respondes exactamente lo mismo todos los días de forma manual.</li>
-                <li>Envías ráfagas de fotos sueltas que saturan y confunden.</li>
-                <li>Compartes PDFs pesados que tus clientes evitan descargar.</li>
-            </ul>
+        <!-- 2. Dolor -->
+        <div class="section-block">
+            <img class="product-img" src="dolorinformacion.jpg" alt="VentaLista - Problema / Dolor">
+        </div>
+
+        <!-- 3. Deseo -->
+        <div class="section-block">
+            <img class="product-img" src="deseoinformacion.jpg" alt="VentaLista - Deseo / Solución">
+        </div>
+
+        <!-- 4. Demostración (Boton Ver Demo posicionado en la mujer) -->
+        <div class="section-block demo-container">
+            <img class="product-img" src="demostracioninformacion.jpg" alt="VentaLista - Demostración del sistema">
+            <button class="btn-ver-demo" onclick="openVideoModal()">
+                <span class="play-icon"></span> Ver Demo
+            </button>
+        </div>
+
+        <!-- 5. Pedido / Oferta con Botón WhatsApp montado encima -->
+        <div class="section-block pedido-container">
+            <img class="product-img" src="pedidoinformacion.jpg" alt="VentaLista - Oferta y Pedido">
             
-            <div class="diagnosis">
-                Tus clientes no deberían preguntar. Deberían comprar.
-            </div>
-        </section>
+            <a href="https://wa.me/51920832884?text=Hola,%20deseo%20solicitar%20mi%20VentaLista" class="btn-whatsapp-floating" target="_blank">
+                <svg class="ws-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                    <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3 18.6-68.1-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                </svg>
+                Solicitar mi VentaLista
+            </a>
+        </div>
 
-        <section style="padding: 10px 0; border: none;">
-            <div class="hero-block">
-                <h2>Te presentamos VentaLista</h2>
-                <p>
-                    Un sistema de ventas ligero para WhatsApp que organiza tu negocio en un solo enlace y convierte consultas en pedidos claros.
-                </p>
-                <div class="video-container">
-                    <video controls poster="https://qrdigital.github.io/vl-landing/faviconventalista.png">
-                        <source src="https://qrdigital.github.io/vl-landing/videoventalista.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </div>
-        </section>
+    </div>
 
-        <section>
-            <h2>Beneficios (Toca para ver el detalle)</h2>
-            <div class="benefits-grid">
-                
-                <div class="benefit-item">
-                    <div class="benefit-header" onclick="toggleBenefit(this)">
-                        <span class="benefit-number">1</span>
-                        <div>Menos preguntas repetidas</div>
-                    </div>
-                    <div class="benefit-content">
-                        <div class="benefit-text">Filtra automáticamente las dudas frecuentes sobre precios, stock o catálogo de tus productos de un solo golpe visual.</div>
-                    </div>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-header" onclick="toggleBenefit(this)">
-                        <span class="benefit-number">2</span>
-                        <div>Más pedidos claros</div>
-                    </div>
-                    <div class="benefit-content">
-                        <div class="benefit-text">Tus clientes estructuran su pedido y te lo envían todo listo en un solo mensaje organizado. No más malentendidos.</div>
-                    </div>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-header" onclick="toggleBenefit(this)">
-                        <span class="benefit-number">3</span>
-                        <div>Ideal para IG, FB y TikTok</div>
-                    </div>
-                    <div class="benefit-content">
-                        <div class="benefit-text">El enlace único se acopla perfectamente a tus biografías de redes sociales o respuestas automatizadas para capturar cada cliente al instante.</div>
-                    </div>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-header" onclick="toggleBenefit(this)">
-                        <span class="benefit-number">4</span>
-                        <div>Actualizaciones rápidas</div>
-                    </div>
-                    <div class="benefit-content">
-                        <div class="benefit-text">¿Cambio de stock o precios? Nos envías los nuevos datos por chat y lo dejamos listo.</div>
-                    </div>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-header" onclick="toggleBenefit(this)">
-                        <span class="benefit-number">5</span>
-                        <div>Enlace Inmortal</div>
-                    </div>
-                    <div class="benefit-content">
-                        <div class="benefit-text">Alojamiento y hosting con infraestructura comercial robusta para garantizar que tu sistema esté online las 24 horas del día.</div>
-                    </div>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-header" onclick="toggleBenefit(this)">
-                        <span class="benefit-number">6</span>
-                        <div>Tu VentaLista lista en 24 horas</div>
-                    </div>
-                    <div class="benefit-content">
-                        <div class="benefit-text">Una vez confirmada la entrega de tu información, configuramos el diseño completo y te lo entregamos funcionando en solo 1 día.</div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section>
-            <h2>Cómo funciona</h2>
-            <div class="step-flow">
-                <div class="step">
-                    <div class="step-title-container">
-                        <span class="step-dot"></span>
-                        <div class="step-title">Compartes</div>
-                    </div>
-                    <div class="step-desc">Pones tu enlace de VentaLista en WhatsApp, TikTok, Instagram o Facebook.</div>
-                </div>
-                <div class="arrow">↓</div>
-                <div class="step">
-                    <div class="step-title-container">
-                        <span class="step-dot"></span>
-                        <div class="step-title">El Cliente Accede</div>
-                    </div>
-                    <div class="step-desc">Ingresa al instante desde cualquier navegador sin descargar aplicaciones, PDFs molestos ni llenar la memoria con fotos.</div>
-                </div>
-                <div class="arrow">↓</div>
-                <div class="step">
-                    <div class="step-title-container">
-                        <span class="step-dot"></span>
-                        <div class="step-title">Selecciona</div>
-                    </div>
-                    <div class="step-desc">Revisa tus productos actualizados con precios claros y arma su pedido directamente en el sistema.</div>
-                </div>
-                <div class="arrow">↓</div>
-                <div class="step">
-                    <div class="step-title-container">
-                        <span class="step-dot"></span>
-                        <div class="step-title">Recibes</div>
-                    </div>
-                    <div class="step-desc">Te llega un mensaje de WhatsApp automático, perfectamente detallado y listo para procesar.</div>
-                </div>
-            </div>
-        </section>
-
-        <section>
-            <h2>En 24 horas recibes:</h2>
-            <div class="grid">
-                <div class="grid-item-block">
-                    <div class="grid-item-title">1. Enlace Personalizado</div>
-                    <div class="grid-item-desc">Un enlace único con el nombre de tu negocio. Lo pondrás en tus redes sociales para centralizar y ordenar toda tu comunicación en WhatsApp.</div>
-                </div>
-                <div class="grid-item-block">
-                    <div class="grid-item-title">2. Código QR Listo para Imprimir</div>
-                    <div class="grid-item-desc">Dirige directamente a tu enlace personalizado. Solo debes imprimirlo y colocarlo en un lugar visible de tu local físico o adherido a cada uno de tus productos.</div>
-                </div>
-                <div class="grid-item-block">
-                    <div class="grid-item-title">3. Guía Estratégica de Operación</div>
-                    <div class="grid-item-desc">El paso a paso exacto para desplegar tu sistema, configurar respuestas rápidas y empezar a desviar el tráfico de preguntones hacia ventas cerradas desde el primer día.</div>
-                </div>
-            </div>
-
-            <h3 style="margin-top: 32px; font-size: 1.3rem;">Puedes agregar:</h3>
-            <ul class="include-list">
-                <li>• Botón con redirección directa a tu WhatsApp centralizado.</li>
-                <li>• Geolocalización enlazada con Google Maps.</li>
-                <li>• Interconexión directa con tus redes sociales.</li>
-                <li>• Selector de productos, fecha y hora.</li>
-            </ul>
-        </section>
-
-        <section>
-            <div class="offer-box" style="margin: 0;">
-                <h2 style="margin-top: 0;">Empieza a cerrar ventas</h2>
-                <div class="price">S/300 <span style="font-size: 1.1rem; font-weight: 500; color: #64748b;">/ año de servicio</span></div>
-                <p style="font-size: 1.05rem; margin-bottom: 24px;">Tú envías la información, nosotros hacemos el resto.</p>
-                <p style="color: var(--primary); font-weight: 700; font-size: 1.1rem;">Creamos tu VentaLista y la dejamos funcionando.</p>
-                
-                <a href="https://wa.me/51970519137?text=Hola,%20quiero%20información%20de%20VentaLista" class="btn-whatsapp" target="_blank">
-                    Solicitar VentaLista vía WhatsApp
-                </a>
-            </div>
-        </section>
-
-        <section style="border-bottom: none;">
-            <h2>Garantías e Información General</h2>
-
-            <div class="accordion-section">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>Preguntas Frecuentes (FAQs)</span>
-                    <span class="accordion-icon">+</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <div class="faq-item">
-                            <div class="faq-question">¿Tengo que configurar el sistema yo mismo?</div>
-                            <div class="faq-answer">No. Tú solo nos envías tus textos, fotos y precios; nosotros nos encargamos del diseño, hosting y de dejarlo operativo al 100%.</div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">¿Mis clientes necesitan descargar una aplicación?</div>
-                            <div class="faq-answer">No, funciona de forma nativa a través de cualquier navegador web desde su celular con una velocidad de carga inmediata.</div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">¿Cómo se gestionan los pagos?</div>
-                            <div class="faq-answer">El sistema genera el pedido detallado. Puedes incluir una sección informativa de tus cuentas (Yape, Plin o bancos) para cerrar la transacción.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-section">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <span>Contrato de Servicio</span>
-                    <span class="accordion-icon">+</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-body">
-                        <div class="contract-text">
-<strong>CONTRATO DE SERVICIO – VENTALISTA DE FLOWLITE</strong>
-
-<strong>1. IDENTIFICACIÓN DE LAS PARTES</strong>
-EL PROVEEDOR, identificado con RUC 10409113431 con nombre comercial FlowLite Systems representado por Ricardo Respaldiza Moya y EL CLIENTE.
-
-<strong>2. OBJETO DEL SERVICIO</strong>
-EL PROVEEDOR se compromete a desarrollar un catálogo digital denominado VentaLista, diseñado para facilitar la presentación de productos y el cierre de ventas mediante enlace directo a WhatsApp.
-El servicio incluye: Hasta 10 imágenes con descripción, Sección de oferta especial, Integración de ubicación (Google Maps), Integración redes sociales, Botón de contacto directo, Selección múltiple de productos, Entrega de 1 enlace web y 1 código QR, Guía Operativa.
-
-<strong>3. INICIO Y PLAZOS</strong>
-El servicio inicia dentro de las 24 horas posteriores a la confirmación del pago del adelanto y la entrega completa del material. El tiempo de entrega es de 24 horas desde la recepción total del contenido. Si EL CLIENTE no entrega el material en un plazo máximo de 15 días hábiles, se podrá dar por finalizado el servicio sin devolución.
-
-<strong>4. INVERSIÓN Y FORMA DE PAGO</strong>
-Costo del servicio: S/300 (vigencia de 1 año). Incluye: Desarrollo, Dominio y Hosting. Forma de pago: 50% de adelanto y 50% contra entrega. El incumplimiento del pago final faculta la suspensión inmediata del servicio.
-
-<strong>5. VIGENCIA</strong>
-El servicio tiene una duración de 12 meses desde la fecha de entrega. Finalizado este periodo, el servicio podrá renovarse opcionalmente.
-
-<strong>6. PROPIEDAD Y USO DEL CONTENIDO</strong>
-Las imágenes, textos y materiales proporcionados son propiedad de EL CLIENTE. En caso de no renovación, el VentaLista será dado de baja.
-
-<strong>7. PROPIEDAD DEL SISTEMA</strong>
-El código, estructura y plantillas del VentaLista son propiedad exclusiva de FLOWLITE. EL CLIENTE adquiere una licencia de uso.
-
-<strong>8. ACTUALIZACIONES</strong>
-Garantía de dos (2) solicitudes de actualizaciones gratuitas durante los primeros siete (7) días calendario posteriores a la entrega. Las modificaciones fuera de este periodo tendrán un costo de S/10 por solicitud o adquirir un paquete de 24 actualizaciones por S/100 (Aplica para cambios de imágenes, precios y descripciones. No incluye cambio de rubro o nombre). Las actualizaciones solicitadas se procesarán con un tiempo de respuesta de hasta 1 hora dentro del horario comercial.
-
-<strong>9. SOPORTE TÉCNICO</strong>
-La regeneración de enlace o código QR por pérdida o descuido tendrá un costo de S/10.
-
-<strong>10. CANCELACIÓN DEL SERVICIO</strong>
-EL CLIENTE podrá solicitar la baja del servicio en cualquier momento sin que esto genere devoluciones ni prorrateos.
-
-<strong>11. LIMITACIÓN DE RESPONSABILIDAD</strong>
-EL PROVEEDOR no garantiza volumen de ventas ni se responsabiliza por caídas de servicios externos como WhatsApp o redes de conectividad de terceros.
-
-<strong>12. ACEPTACIÓN</strong>
-La aceptación del servicio y/o el pago del adelanto implica la conformidad total con los presentes términos.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
-        <footer>
-            <p>&copy; 2026 VentaLista. Infraestructura y diseño comercial.</p>
-        </footer>
-
+    <!-- Modal para el Video -->
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeVideoModal()">&times;</span>
+            <video id="demoVideo" controls>
+                <source src="videoinformacion.mp4" type="video/mp4">
+                Tu navegador no soporta el formato de video.
+            </video>
+        </div>
     </div>
 
     <script>
-        // Función para controlar la apertura de los detalles de beneficios
-        function toggleBenefit(element) {
-            const item = element.parentElement;
-            const content = item.querySelector('.benefit-content');
-            
-            if (item.classList.contains('active')) {
-                content.style.maxHeight = null;
-                item.classList.remove('active');
-            } else {
-                document.querySelectorAll('.benefit-item').forEach(i => {
-                    i.classList.remove('active');
-                    i.querySelector('.benefit-content').style.maxHeight = null;
-                });
-                
-                item.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
+        function openVideoModal() {
+            var modal = document.getElementById('videoModal');
+            var video = document.getElementById('demoVideo');
+            modal.style.display = 'flex';
+            video.play();
         }
 
-        // Función para controlar los bloques principales de FAQs y Contrato
-        function toggleAccordion(element) {
-            const section = element.parentElement;
-            const content = section.querySelector('.accordion-content');
-            
-            if (section.classList.contains('active')) {
-                content.style.maxHeight = null;
-                section.classList.remove('active');
-            } else {
-                section.classList.add('active');
-                content.style.maxHeight = content.scrollHeight + "px";
+        function closeVideoModal() {
+            var modal = document.getElementById('videoModal');
+            var video = document.getElementById('demoVideo');
+            video.pause();
+            video.currentTime = 0;
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById('videoModal');
+            if (event.target == modal) {
+                closeVideoModal();
             }
         }
     </script>
